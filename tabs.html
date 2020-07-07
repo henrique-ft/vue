@@ -1,0 +1,34 @@
+<html>
+  <head>
+    <style>
+      [v-cloak] > * { display: none; } /* When v-cloak are on */
+      [v-cloak]::before { content: "Loading..."; }
+      .active { color: black }
+    </style>
+  </head>
+  <body>
+    <div id="tabs" v-cloak> <!-- The v-cloak directive goes out when vue application is ready -->
+
+      <!-- When we put : in front of an attribute, we can digit js inside it ex: :class -->
+      <a href="#tab1" :class="(tab == 1) ? 'active' : ''" @click.prevent="changeTabTo(1)">tab 1</a> <!-- When clicked trigger changeTabTo function -->
+      <a href="#tab2" :class="(tab == 2) ? 'active' : ''" @click.prevent="changeTabTo(2)">tab 2</a>
+      <a href="#tab3" :class="(tab == 3) ? 'active' : ''" @click.prevent="tab = 3">tab 3</a> <!-- We can also evaluate some js here -->
+      <br>
+      <p id="tab1" v-if="tab == 1">tab 1</p> <!-- Show component if... -->
+      <p id="tab2" v-if="tab == 2">tab 2</p>
+      <p id="tab3" v-if="tab == 3">tab 3</p>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+      var tabs = new Vue({
+        el: "#tabs", // Define the element that vue will mount
+        data: { tab: 1 }, // Define the state
+        methods: { // Define methods on Vue application
+          changeTabTo: function (number) {
+            this.tab = number
+          }
+        }
+      })
+    </script>
+  </body>
+</html>
